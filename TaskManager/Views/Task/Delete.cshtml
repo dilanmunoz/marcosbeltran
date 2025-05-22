@@ -1,0 +1,51 @@
+﻿@model TaskManager.Models.Task
+
+@{
+    ViewBag.Title = "Eliminar Tarea";
+}
+
+<div class="container d-flex justify-content-center mt-5">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-header bg-black text-white">
+                <h4 class="mb-0">¿Estás seguro de que deseas eliminar esta tarea?</h4>
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-4">Titulo</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Title)</dd>
+
+                    <dt class="col-sm-4">Descripción</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Description)</dd>
+
+                    <dt class="col-sm-4">Prioridad</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Priority)</dd>
+
+                    <dt class="col-sm-4">Completado</dt>
+                    <dd class="col-sm-8">
+                        @if (Model.IsCompleted)
+                        {
+                            <i class="bi bi-check-square-fill text-success" style="font-size: 1.5rem;"></i>
+                        }
+                        else
+                        {
+                            <i class="bi bi-x-square-fill text-danger" style="font-size: 1.5rem;"></i>
+                        }
+                    </dd>
+
+                    <dt class="col-sm-4">Vencimiento</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.DueDate)</dd>
+                </dl>
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="d-flex justify-content-between mt-4">
+                        <input type="submit" value="Eliminar" class="btn btn-danger" />
+                        @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-secondary" })
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
